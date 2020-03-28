@@ -20,12 +20,6 @@
           <el-menu-item index="teach_plan">教学计划</el-menu-item>
           <el-menu-item index="exam_type">考试方式</el-menu-item>
           <el-menu-item index="reference_book">参考书目</el-menu-item>
-          <el-menu-item index="courseware">课件下载</el-menu-item>
-        </el-submenu>
-        <el-submenu index="knowledge_point" v-show="currentCourseId>-1">
-          <template slot="title">知识点检测</template>
-          <el-menu-item index="overview">总览</el-menu-item>
-          <el-menu-item index="history">历史</el-menu-item>
         </el-submenu>
         <el-submenu index="work" v-show="currentCourseId>-1">
           <template slot="title">在线作业</template>
@@ -40,7 +34,6 @@
         <el-submenu index="rank_list" v-show="currentCourseId>-1">
           <template slot="title">排行榜</template>
           <el-menu-item index="evaluate">实力排行</el-menu-item>
-          <el-menu-item index="coverage">知识点覆盖率排行</el-menu-item>
         </el-submenu>
         <el-submenu index="question_answer" v-show="currentCourseId>-1">
           <template slot="title">答疑</template>
@@ -87,7 +80,7 @@ export default {
   },
   watch: {
     "$route.path": function(value) {
-      if (value == "/client"||value.startsWith('/client/person')) {
+      if (value == "/client" || value.startsWith("/client/person")) {
         this.currentCourseId = -1;
       } else {
         this.init();
@@ -130,12 +123,12 @@ export default {
       }
     },
     handleCommand(command) {
-      switch(command){
-        case 'logout':
+      switch (command) {
+        case "logout":
           clearClientInfo();
           this.$router.push("/public/client_login");
           break;
-        case 'info':
+        case "info":
           this.$router.push("/client/person/student_info");
           break;
       }
@@ -144,7 +137,7 @@ export default {
       $httpc.get(`/user/${getClientUserInfo().u_id}/course`).then(res => {
         this.courseList = res;
         //传递课程信息到home.vue
-        bus.$emit('courseList',res);
+        bus.$emit("courseList", res);
         this.isCompleted = true;
         this.$nextTick(() => {
           this.init();
@@ -177,7 +170,7 @@ export default {
 
 .left {
   display: flex;
-  margin-left:25px;
+  margin-left: 25px;
 }
 .right {
   display: flex;

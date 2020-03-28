@@ -59,7 +59,7 @@ export default {
       startTime: 0,
       endTime: 0,
       answers: {},
-      sum:{},
+      sum: {},
       data: {},
       moment: "",
       mm: 0,
@@ -96,6 +96,7 @@ export default {
             item.alternative_answer = JSON.parse(item.alternative_answer);
           });
           this.data = res;
+          console.log(this.data);
           this.getAnswer();
           this.isLoading = false;
         })

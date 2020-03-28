@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-popover placement="top" trigger="hover">
-      <div v-if="type=='person'">
+      <div v-if="type=='person' && data && data.b_name">
         <div>当前：
           <h5>{{data.b_name}}</h5>
         </div>
@@ -41,9 +41,15 @@ export default {
   },
   methods: {
     getData() {
-      $http.get(`/user/${this.u_id}/badge/${this.data.next_level}?type=${this.data.b_type}`).then(res => {
-        this.nextData = res;
-      });
+      $http
+        .get(
+          `/user/${this.u_id}/badge/${this.data.next_level}?type=${
+            this.data.b_type
+          }`
+        )
+        .then(res => {
+          this.nextData = res;
+        });
     }
   }
 };
